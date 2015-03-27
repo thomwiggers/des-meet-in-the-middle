@@ -17,4 +17,8 @@ Usage:
 
 See:
 
-    python des.py --help
+    ./des.py --help
+
+Run the unit tests using:
+
+    python test_des.py

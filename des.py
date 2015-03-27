@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from Crypto.Cipher import DES
 import logging
 from six.moves import input  # python2/3 compatibility
