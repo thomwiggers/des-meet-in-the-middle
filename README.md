@@ -6,6 +6,11 @@ Requirements:
 * python 3
 * pycrypto
 * docopt
+* six
+
+Install the requirements using
+
+    pip install -r requirements.txt
 
 Usage:
 ------
