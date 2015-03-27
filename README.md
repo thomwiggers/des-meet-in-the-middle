@@ -12,6 +12,9 @@ Install the requirements using
 
     pip install -r requirements.txt
 
+We recommend using virtualenv to not install these requirements into the global
+environment.
+
 Usage:
 ------
 
@@ -21,4 +24,4 @@ See:
 
 Run the unit tests using:
 
-    python test_des.py
+    python3 test_des.py
