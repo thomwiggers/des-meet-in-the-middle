@@ -55,7 +55,7 @@ def meet_in_the_middle(nbits, text_pairs, pool=None):
     logger.info("precomputed {} items".format(len(table)))
 
     logger.info("Cracking cipher_text")
-    for key in (nth_key(i) for i in range(0, 2**nbits)):
+    for key in key_generator:
         candidate = decrypt(key, cipher_text)
         if candidate in table:
             logger.info("Found key: ({}, {})".format(table[candidate], key))
