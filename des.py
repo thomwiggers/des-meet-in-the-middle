@@ -38,14 +38,25 @@ def nth_key(index):
 
 
 def _precompute(plain_text, key):
+    """helper function used for multiprocessing"""
     return (encrypt(key, plain_text), key)
 
 
 def meet_in_the_middle(nbits, text_pairs, pool=None):
-    logger.info("Pre-computing")
+    """Implements a meet-in-the-middle attack on DES.
+
+    Arguments:
+        nbits -- the number of bits to attack
+        text_pairs -- a list of (plain text, cipher text)-tuples
+        pool -- (optional) threadpool
+    """
 
     plain_text, cipher_text = text_pairs[0]
+
+    # generator for the key candidates
     key_generator = (nth_key(i) for i in range(0, 2**nbits))
+
+    logger.info("Pre-computing")
     if pool is None:
         table = dict([_precompute(plain_text, key) for key in key_generator])
     else:
@@ -55,6 +66,8 @@ def meet_in_the_middle(nbits, text_pairs, pool=None):
     logger.info("precomputed {} items".format(len(table)))
 
     logger.info("Cracking cipher_text")
+    # TODO parallelising this bit is a bit harder because you might
+    # want to return earlier.
     for key in key_generator:
         candidate = decrypt(key, cipher_text)
         if candidate in table:
@@ -76,7 +89,7 @@ def run(argv=None):
     Options::
         -h,--help           Show this help
         -v,--verbose        Increase verbosity
-        --test              Get a test string
+        --test              Generate test strings
     """
     import sys
     import docopt
